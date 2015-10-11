@@ -45,7 +45,10 @@ module.exports = {
             },
             {
                 test: /\.(ttf|eot|svg|woff|woff2|png|jpg|gif)$/,
-                loader: 'file?name=[path][name].[ext]&context=./src',
+                loaders: [
+                    'file?name=[path][name].[ext]&context=./src',
+                    'image-webpack'
+                ],
                 exclude: /(node_modules|bower_components)/
             }
         ]

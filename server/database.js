@@ -17,14 +17,14 @@ let Database = {
         technos: {
             data: [
                 'HapiJS',
+                'Webpack',
                 'React',
+                'React-router',
                 'Redux',
                 'Universal JS',
                 'ES2015',
                 'Babel',
-                'Webpack',
                 'Hot module reload',
-                'Sass',
                 'ESLint'
             ]
         }
