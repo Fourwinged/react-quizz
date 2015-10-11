@@ -1,0 +1,69 @@
+
+// Main colors
+$color-primary: #A1E8AF;
+$color-secondary: #C08497;
+$color-accent: #A1E8AF;
+$color-accent-shadow: #73d085;
+$color-text: #3A405A;
+$color-background: #fcdfa6;
+$color-white: #fcf9f7;
+
+// Default shadow color
+$color-shadow: rgba(0, 0, 0, .12);
+
+// The default font family.
+$base-font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', Arial;
+
+// The default font type.
+$base-font-type: sans-serif;
+
+// The base font size.
+$base-font-size: 16px;
+
+// The font sizes for h1-h6.
+$h1-font-size: 2.2em;
+$h2-font-size: 1.4em;
+$h3-font-size: 1.4em;
+$h4-font-size: 1em;
+$h5-font-size: 1em;
+$h6-font-size: .8em;
+
+// The headings font weight.
+$h1-font-weight: bold;
+$h2-font-weight: bold;
+$h3-font-weight: bold;
+$h4-font-weight: bold;
+$h5-font-weight: normal;
+$h6-font-weight: bold;
+
+// Default shadows.
+$base-shadow: 0 2px 2px $color-shadow;
+$base-fat-shadow: 0 4px 0 #ad5e75;
+
+
+// Layout
+// -------------------------
+
+// The gutter sizes.
+$layout-tiny-gutter: 6px;
+$layout-small-gutter: 12px;
+$layout-gutter: 24px;
+$layout-large-gutter: 48px;
+
+// Susy configuration.
+$susy: (
+  global-box-sizing: border-box,
+  math: fluid,
+  output: float,
+  gutter-position: split
+);
+
+// Max width of content.
+$layout-max-width: 42em;
+
+
+// Misc
+// -------------------------
+
+// Default border radius
+$base-border-radius: 4px;

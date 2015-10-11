@@ -1,0 +1,47 @@
+// Helper to center vertically (use on container:before)
+@mixin vertical-align-helper() {
+    content: " ";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+// Helper to hide visually something
+@mixin invisible() {
+  position: absolute; 
+  overflow: hidden; 
+  clip: rect(0 0 0 0); 
+  height: 1px; width: 1px; 
+  margin: -1px; padding: 0; border: 0; 
+}
+
+// Helper to hide visually something
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    *zoom: 1;
+}
+
+// Gutter mixins
+@mixin tiny-gutter-top() { padding-top: $layout-tiny-gutter; }
+@mixin small-gutter-top() { padding-top: $layout-small-gutter; }
+@mixin gutter-top() { padding-top: $layout-gutter; }
+@mixin large-gutter-top() { padding-top: $layout-large-gutter; }
+
+@mixin tiny-gutter-bottom() { padding-bottom: $layout-tiny-gutter; }
+@mixin small-gutter-bottom() { padding-bottom: $layout-small-gutter; }
+@mixin gutter-bottom() { padding-bottom: $layout-gutter; }
+@mixin large-gutter-bottom() { padding-bottom: $layout-large-gutter; }
+
+@mixin tiny-gutter-left() { padding-left: $layout-tiny-gutter; }
+@mixin small-gutter-left() { padding-left: $layout-small-gutter; }
+@mixin gutter-left() { padding-left: $layout-gutter; }
+@mixin large-gutter-left() { padding-left: $layout-large-gutter; }
+
+@mixin tiny-gutter-right() { padding-right: $layout-tiny-gutter; }
+@mixin small-gutter-right() { padding-right: $layout-small-gutter; }
+@mixin gutter-right() { padding-right: $layout-gutter; }
+@mixin large-gutter-right() { padding-right: $layout-large-gutter; }
