@@ -15,6 +15,7 @@ let Database = {
             intitule: 'Associe chaque conifère à sa description !'
         },
         technos: {
+            intitule: 'Un quizz fort basique, construit avec des technos et concepts JS bien hype du moment.',
             data: [
                 'HapiJS',
                 'Webpack',

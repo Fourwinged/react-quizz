@@ -14,6 +14,9 @@ import {
     SHUFFLE_DATA
 } from './Actions';
 
+// Object.assign() polyfill
+import objectAssign from 'object-assign';
+
 var defaultTitle = 'Titre';
 
 function configs(state = {}, action) {
@@ -50,22 +53,25 @@ function page(state = '', action) {
 
 function data(state = {
     isFetching: false,
+    intitule: '',
     data: {}
 }, action) {
     switch (action.type) {
         case REQUEST_DATA:
-            return Object.assign({}, state, {
+            return objectAssign({}, state, {
                 isFetching: true
             });
         case RECEIVE_DATA:
-            return Object.assign({}, state, {
+            return objectAssign({}, state, {
                 isFetching: false,
+                intitule: action.intitule,
                 data: action.data,
                 lastUpdated: action.receivedAt
             });
         case SHUFFLE_DATA:
-            return Object.assign({}, state, {
+            return objectAssign({}, state, {
                 isFetching: false,
+                intitule: action.intitule,
                 data: action.data,
                 lastUpdated: action.shuffledAt
             });
@@ -79,7 +85,7 @@ function dataSources(state = {}, action) {
         case RECEIVE_DATA:
         case REQUEST_DATA:
         case SHUFFLE_DATA:
-            return Object.assign({}, state, {
+            return objectAssign({}, state, {
                 [action.source]: data(state[action.source], action)
             });
         default:

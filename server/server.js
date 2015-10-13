@@ -17,6 +17,9 @@ let axios = require('axios');
 // Babel register hook, provides transpiling for ES2015 files
 require('babel/register');
 
+// Object.assign() polyfill
+let objectAssign = require('object-assign');
+
 // Custom render function
 let renderWithProps = require('./render');
 
@@ -25,6 +28,9 @@ let Routes = require('../config/Routes');
 
 // Define the APIs to call
 let SourceApis = require('../config/sourceApis');
+
+// Define the database
+let Database = require('./database');
 
 // Import the Redux actions
 let Actions = require('../src/scripts/shared/Actions');
@@ -112,11 +118,20 @@ server.route({
         // Prevent XSS
         let sourceName = encodeURIComponent(request.params.source);
 
+        // If the data is already fetched, get it from database
+        if(Database.data[sourceName] && Database.data[sourceName].data) {
+            reply(Database.data[sourceName]);
+        }
         // If the source exists, fetch it and reply using its data
-        if(SourceApis[sourceName]) {
+        else if(SourceApis[sourceName]) {
             axios.get(SourceApis[sourceName])
             .then(function(response){
-                reply(response.data);
+                Database.data[sourceName] = objectAssign({}, Database.data[sourceName], {
+                    data: {
+                        items: response.data.data
+                    }
+                });
+                reply(Database.data[sourceName]);
             });
         }
         // If it's undefined, reply is null
@@ -141,7 +156,7 @@ for(let i = 0; i < routeLength; i++) {
         method: 'GET',
         path: Routes.routeConfigs[i].path,
         handler: (request, reply) => {
-            return renderWithProps(request.url, Routes.routeConfigs[i])
+            return renderWithProps(request.url, Routes.routeConfigs[i], Database)
             .then((output) => {
                 reply(output);
             });

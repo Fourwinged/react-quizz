@@ -32,21 +32,23 @@ export function requestData(source) {
     return {type: REQUEST_DATA, source: source};
 }
 
-export function receiveData(source, data) {
+export function receiveData(source, data, intitule) {
     return {
         type: RECEIVE_DATA,
         source: source,
+        intitule: intitule,
         data: data,
         receivedAt: Date.now()
     };
 }
 
-export function shuffleData(source, data, completed) {
+export function shuffleData(source, data, intitule, completed) {
     var filtered = filterCompleted(data.items, completed);
     var questions = randomize(filtered, 3);
     return {
         type: SHUFFLE_DATA,
         source: source,
+        intitule: intitule,
         data: {
             items: filtered,
             questions: questions,
@@ -59,6 +61,11 @@ export function shuffleData(source, data, completed) {
 export function fetchData(source, data, items, base = '') {
     return function(dispatch) {
         var alreadyFetched = data && data[source.name] && data[source.name].data;
+        var intitule = '';
+
+        if(data && data[source.name]) {
+            intitule = data[source.name].intitule;
+        }
 
         // If no source exists
         if(!source) {
@@ -70,14 +77,14 @@ export function fetchData(source, data, items, base = '') {
         // If it's a quizz with data, but without questions
         if(alreadyFetched && source.type === 'quizz' && !data[source.name].data.questions) {
             return new Promise((resolve) => {
-                dispatch(shuffleData(source.name, data[source.name]));
+                dispatch(shuffleData(source.name, data[source.name], intitule));
                 resolve();
             });
         }
         // If the data is ready
         else if(alreadyFetched) {
             return new Promise((resolve) => {
-                dispatch(receiveData(source.name, data[source.name].data));
+                dispatch(receiveData(source.name, data[source.name].data, intitule));
                 resolve();
             });
         }
@@ -90,8 +97,8 @@ export function fetchData(source, data, items, base = '') {
         .then((response) => {
             // Filter the data and shuffle it
             if(source.type === 'quizz') {
-                var filtered = filterData(response.data.data);
-                return dispatch(shuffleData(source.name, {items: filtered}));
+                var filtered = filterData(response.data.data.items);
+                return dispatch(shuffleData(source.name, {items: filtered}, response.data.intitule));
             }
         })
         .catch(() => {
@@ -110,20 +117,4 @@ export function setTitle(title) {
 
 export function setPage(page) {
     return {type: SET_PAGE, page: page};
-}
-
-export function getPage(target, data) {
-    var config = data.configs[target].config;
-    var targetData = data.dataSources;
-    return function(dispatch) {
-        dispatch(setPage(target));
-        // dispatch(setTitle(data.titles[config.page]));
-        return dispatch(fetchData(config.source, targetData))
-        .then(() => {
-            return;
-        })
-        .catch(() => {
-            return;
-        });
-    };
 }

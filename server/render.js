@@ -17,7 +17,7 @@ import {match, RoutingContext}         from 'react-router';
 import {createRoutes, routeConfigs} from '../config/Routes';
 
 // Local database
-import Database from './database';
+// import Database from './database';
 
 // Redux
 import {createStore, applyMiddleware}  from 'redux';
@@ -71,7 +71,7 @@ function getFilenames(filePath, array) {
     });
 }
 
-// Get the timestamped scrip and CSS
+// Get the timestamped script and CSS
 const scriptDir = '/static/scripts/';
 const stylesDir = '/static/styles/';
 let scripts = [];
@@ -83,7 +83,7 @@ getFilenames(stylesDir, styles);
 /* Render function
 */
 
-function renderWithProps(url, config) {
+function renderWithProps(url, config, Database) {
 
     // Create the store
     let store = createStoreWithMiddleware(reducer);

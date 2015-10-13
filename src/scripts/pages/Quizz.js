@@ -29,7 +29,15 @@ class Quizz extends React.Component {
 
     // Data fetch on client side
     componentDidMount() {
-        this.props.dispatch(fetchData({'name': 'coniferes', 'type': 'quizz'}, this.props.data));
+        this.props.dispatch(fetchData({
+            'name': 'coniferes',
+            'type': 'quizz'
+        }, {
+            coniferes: {
+                intitule: this.props.intitule,
+                data: this.props.data
+            }
+        }));
     }
 
     // This function checks if a selected item is the correct answer
@@ -57,7 +65,7 @@ class Quizz extends React.Component {
         });
         // Dispatch an action that will shuffle new answers and a new question.
         // It will also mark the current question as completed
-        this.props.dispatch(shuffleData('coniferes', this.props.data, this.props.data.answer.NOM_FR));
+        this.props.dispatch(shuffleData('coniferes', this.props.data, this.props.intitule, this.props.data.answer.NOM_FR));
     }
 
     // Function that takes an array item and creates an answer list item with its own checkAnswer function call
