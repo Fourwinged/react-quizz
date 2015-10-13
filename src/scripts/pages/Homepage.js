@@ -5,9 +5,9 @@
 */
 
 import React from 'react';
-import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import Meta from '../shared/components/Meta';
 import Title from '../shared/components/Title';
 
 // We create a React component class
@@ -35,12 +35,7 @@ class Homepage extends React.Component {
         // Return the homepage markup
         return (
             <div>
-                <Helmet
-                    title={ this.props.title }
-                    titleTemplate="Quizz - %s"
-                    meta={ [
-                        {name: 'description', content: 'Un quizz basique, construit avec HapiJS, React et Redux.'}
-                    ] } />
+                <Meta title={ this.props.title } description="Un quizz basique, construit avec HapiJS, React et Redux." />
                 <Title text={ this.props.title } />
                 <article className="card">
                     <h2 className="card-header">{ this.props.intitule }</h2>

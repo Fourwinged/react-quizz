@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-import Helmet from 'react-helmet';
+import Meta from '../shared/components/Meta';
 import Title from '../shared/components/Title';
 
 // We create a React component class
@@ -15,12 +15,7 @@ class NotFound extends React.Component {
     render() {
         return (
             <div>
-                <Helmet
-                    title={ this.props.title }
-                    titleTemplate="Quizz - %s"
-                    meta={ [
-                        {name: 'description', content: 'Un quizz basique, construit avec HapiJS, React et Redux.'}
-                    ] } />
+                <Meta title={ this.props.title } description="Un quizz basique, construit avec HapiJS, React et Redux." />
                 <Title text={ this.props.title } />
                 <article className="card">
                     <h2 className="card-header">Oups, cette page n'existe pas ou a été déplacée.</h2>

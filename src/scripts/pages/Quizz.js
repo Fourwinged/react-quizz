@@ -5,8 +5,8 @@
 */
 
 import React from 'react';
-import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
+import Meta from '../shared/components/Meta';
 import {fetchData, shuffleData} from '../shared/Actions';
 import Title from '../shared/components/Title';
 
@@ -89,12 +89,7 @@ class Quizz extends React.Component {
         if(this.props.loading || !this.props.data) {
             return (
                 <div>
-                    <Helmet
-                        title={ this.props.title }
-                        titleTemplate="Quizz - %s"
-                        meta={ [
-                            {name: 'description', content: 'Un quizz basique, construit avec HapiJS, React et Redux.'}
-                        ] } />
+                    <Meta title={ this.props.title } description="Un quizz basique, construit avec HapiJS, React et Redux." />
                     <Title text={ this.props.title } />
                     <article className="card">
                         <h2 className="card-header">{ this.props.intitule }</h2>
@@ -161,12 +156,7 @@ class Quizz extends React.Component {
         // Return the div with its correct card
         return (
             <div>
-                <Helmet
-                    title={ this.props.title }
-                    titleTemplate="Quizz - %s"
-                    meta={ [
-                        {name: 'description', content: 'Un quizz basique, construit avec HapiJS, React et Redux.'}
-                    ] } />
+                <Meta title={ this.props.title } description="Un quizz basique, construit avec HapiJS, React et Redux." />
                 <Title text={ this.props.title } />
                 { card }
             </div>
